@@ -1,12 +1,16 @@
-# ✅ [Completed] NFT Minter Tutorial
+# ✅ [Completed] UDHR NFT Minter(For human rights DAO)
 
-This project contains the COMPLETED files for [Alchemy's NFT Minter tutorial](https://docs.alchemyapi.io/alchemy/tutorials/nft-minter), in which we teach you how to connect your smart contract to your React dApp project by building an NFT Minter using Metamask and Web3. It is best used as a reference.
+This project contains the COMPLETED files for [HRDAO's nft minting page](https://...).
+In which we connect your wallet to smart contract through your React dApp project by building an NFT Minter using Metamask and Web3.
+And builds bundle.js that can be reused with other templates. In this project bundle.js is used with Webflow.
 
 # 🪜 Installation
 To use this minter, you'll need to do the following:
 
 1. Run `npm install` to download the `node_modules` folder.
-2. Download the [dotenv package](https://www.npmjs.com/package/dotenv) in your project directory by running `npm install dotenv --save` in your terminal
+2. Edit src\util\interact.js file and here edit 'apiKey' and 'contractAddress'. 
+   Here 'alchemyKey' is used as apiKey and u should replace this with your 'apiKey' u used to deploy your smart contract.
+   And 'contractAddress' is address of deployed smart contract.
 3. Create a `.env` file in the root directory this `nft-minter` by entering the following on your command line: `vim .env` and then add your [Alchemy API Key](https://docs.alchemyapi.io/alchemy/tutorials/nft-minter#create-your-alchemy-api-key) and [Pinata Key and Secret](https://pinata.cloud/keys). Altogether, your `.env` file should look like so:
 
 ```
