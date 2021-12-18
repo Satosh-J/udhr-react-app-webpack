@@ -20,4 +20,4 @@ To use this minter, you'll need to do the following:
 4. Run `npm start` in your terminal to open the minter in your browser at http://localhost:3000/.
 5. Run `npm webpack-build` in your terminal to make `bundle.js` in your `\dist` directory.
 6. Host newly created `bundle.js` on CDN or by publishing it on Github.
-7. As this project is interacting with webflow, you should embed element with id is `root" and also include hosted `bundle.js` in it. To include `bundle.js` in your webflow, include it as `<script src = "http://.../bundle.js`></script>` page's before `<body>`.
+7. As this project is interacting with webflow, you should embed element with id is `root` and also include hosted `bundle.js` in it. To include `bundle.js` in your webflow, include it as `<script src = "http://.../bundle.js`></script>` page's before `<body>`.
