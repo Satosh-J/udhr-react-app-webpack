@@ -1,11 +1,9 @@
 import './Button.css';
-import nft_icon from './NFT_Icon.png';
 import { useEffect, useState } from "react";
 import {
   connectWallet,
   getCurrentWalletConnected,
   mintNFT,
-  udhrContract,
 } from "./util/interact.js";
 
 const Minter = () => {
@@ -61,13 +59,13 @@ const Minter = () => {
   }
 
   const onMintPressed = async () => {
+    console.log("sd");
     const { success, status } = await mintNFT(eth2Wei(donationAmount));
     setWalletStatus(status);
     if (success) {
       console.log("success");
     }
   };
-
 
   return (<div>
 
