@@ -99,8 +99,7 @@ const Minter = () => {
         onChange={(e) => setDonationAmount(e.target.value)}
         value={donationAmount}
       />
-      <label>ether</label>
-      
+      <p>ether</p>
       <button id="btn_mint"  onClick={onMintPressed} disabled = {!walletAddress.length}
       class = {walletAddress.length> 0 ? ("enabled") : ("disabled")}
       >
