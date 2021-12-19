@@ -68,6 +68,19 @@ const Minter = () => {
     }
   };
 
+<<<<<<< HEAD
+=======
+  function addSmartContractListener() {
+    udhrContract.events.TreasuryWalletChanged({}, (error, data) => {
+      if (error) {
+        setStatus("😥 " + error.message);
+      } else {
+        setStatus("🎉 Your message has been updated!");
+      }
+    });
+  }
+
+>>>>>>> parent of 096343c (Status text changed)
   return (<div>
 
       <button id="btn_connect"
