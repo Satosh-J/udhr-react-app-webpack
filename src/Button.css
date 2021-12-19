@@ -7,7 +7,6 @@ button.enabled {
     padding-left: 15px;
     padding-right: 15px;
     padding-bottom: 9px;
-    border-radius: 20px;
 }
 button {
     background-color: #3898ec;
@@ -29,8 +28,6 @@ button.disabled {
     padding-left: 15px;
     padding-right: 15px;
     padding-bottom: 9px;
-    border-radius: 20px;
-
 }
 input {
     text-align: center;
@@ -41,5 +38,5 @@ input {
     min-width: 150px;
     background: papayawhip;
     border: none;
-    border-radius: 20px;
+    border-radius: 10px;
 }

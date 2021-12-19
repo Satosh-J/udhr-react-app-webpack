@@ -8,18 +8,19 @@ import {
 
 const Minter = () => {
   const [walletAddress, setWallet] = useState("");
-  const [wallet_status, setWalletStatus] = useState("");
+  const [status, setStatus] = useState("");
   const [donationAmount, setDonationAmount] = useState(0);
 
   useEffect(() => {
     fetchWallet();
+    addSmartContractListener()
     addWalletListener();
   }, []);
 
   async function fetchWallet() {
     const {address, status} = await getCurrentWalletConnected();
     setWallet(address);
-    setWalletStatus(status); 
+    setStatus(status); 
   }
   
   function addWalletListener() {
@@ -27,14 +28,14 @@ const Minter = () => {
       window.ethereum.on("accountsChanged", (accounts) => {
         if (accounts.length > 0) {
           setWallet(accounts[0]);
-          setWalletStatus("👆🏽 Press this button to mint a new UDHRNFT.");
+          setStatus("👆🏽 Press this button to mint a new UDHRNFT.");
         } else {
           setWallet("");
-          setWalletStatus("🦊 Connect to Metamask using the top button.");
+          setStatus("🦊 Connect to Metamask using the top right button.");
         }
       });
     } else {
-      setWalletStatus(
+      setStatus(
         <p>
           {" "}
           🦊{" "}
@@ -50,7 +51,7 @@ const Minter = () => {
   const connectWalletPressed = async () => {
     const walletResponse = await connectWallet();
     setWallet(walletResponse.address);
-    setWalletStatus(walletResponse.status);
+    setStatus(walletResponse.status);
   };
 
   function eth2Wei(value){
@@ -61,12 +62,25 @@ const Minter = () => {
   const onMintPressed = async () => {
     console.log("sd");
     const { success, status } = await mintNFT(eth2Wei(donationAmount));
-    setWalletStatus(status);
+    setStatus(status);
     if (success) {
       console.log("success");
     }
   };
 
+<<<<<<< HEAD
+=======
+  function addSmartContractListener() {
+    udhrContract.events.TreasuryWalletChanged({}, (error, data) => {
+      if (error) {
+        setStatus("😥 " + error.message);
+      } else {
+        setStatus("🎉 Your message has been updated!");
+      }
+    });
+  }
+
+>>>>>>> parent of 096343c (Status text changed)
   return (<div>
 
       <button id="btn_connect"
@@ -77,8 +91,8 @@ const Minter = () => {
         {walletAddress.length > 0 ? (<span>👨 Connected</span>) : (<span>🤔 Connect Wallet</span>)}
       </button>
 
-      <p style={{ color: "blue" }}>
-        {wallet_status}
+      <p id="status" style={{ color: "red" }}>
+        {status}
       </p>
 
       <input id="mint_amount"
@@ -93,6 +107,7 @@ const Minter = () => {
       >
         💎 Mint NFT
       </button>
+
     </div>
   );
 };

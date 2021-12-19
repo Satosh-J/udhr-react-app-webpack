@@ -9,6 +9,66 @@ export const udhrContract = new web3.eth.Contract(
   contractAddress
 );
 
+export const loadCurrenctOwner = async () => { 
+  const owner = await udhrContract.methods.owner().call(); 
+  return owner;
+};
+
+export const loadCurrenctTreasury = async () => { 
+  const treasury = await udhrContract.methods.treasury().call(); 
+  return treasury;
+};
+
+export const loadMetadata = async (tokenId) => { 
+  const metadata = await udhrContract.methods.nftMetas(tokenId).call();
+  return metadata; 
+};
+
+export const changeContractOwner = async (address, newOwner) => {
+  //input error handling
+  if (!window.ethereum || address === null) {
+    return {
+      status:
+        "💡 Connect your Metamask wallet to update the message on the blockchain.",
+    };
+  }
+  if (newOwner.trim() === "" || web3.utils.isAddress(newOwner)) {
+    return {
+      status: "❌ New address is not valid",
+    };
+  }
+  const transactionParameters = {
+    to: contractAddress, // Required except during contract publications.
+    from: address, // must match user's active address.
+    data: udhrContract.methods.transferOwnership(newOwner).encodeABI(),
+  };
+  //sign the transaction
+  try {
+    const txHash = await window.ethereum.request({
+      method: "eth_sendTransaction",
+      params: [transactionParameters],
+    });
+    return {
+      status: (
+        <span>
+          ✅{" "}
+          <a target="_blank" rel="noreferrer" href={`https://ropsten.etherscan.io/tx/${txHash}`}>
+            View the status of your transaction on Etherscan!
+          </a>
+          <br />
+          ℹ️ Once the transaction is verified by the network, the message will
+          be updated automatically.
+        </span>
+      ),
+    };
+  } catch (error) {
+    return {
+      status: "😥 " + error.message,
+    };
+  }
+}
+
+
 export const connectWallet = async () => {
   if (window.ethereum) {
     try {
@@ -16,7 +76,7 @@ export const connectWallet = async () => {
         method: "eth_requestAccounts",
       });
       const obj = {
-        status: "😎 Your wallet address is " + addressArray[0] + ".",
+        status: "👆🏽 Press  Mint NFT button to mint a new UDHRNFT.",
         address: addressArray[0],
       };
       return obj;
@@ -54,12 +114,12 @@ export const getCurrentWalletConnected = async () => {
       if (addressArray.length > 0) {
         return {
           address: addressArray[0],
-          status: "😎 Your wallet address is " + addressArray[0] + ".",
+          status: "👆🏽 Press  Mint NFT button to mint a new UDHRNFT.",
         };
       } else {
         return {
           address: "",
-          status: "🦊 Connect to Metamask using the top button.",
+          status: "🦊 Connect to Metamask using the top right button.",
         };
       }
     } catch (err) {
