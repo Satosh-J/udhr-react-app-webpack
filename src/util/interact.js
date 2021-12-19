@@ -1,4 +1,3 @@
-// import { pinJSONToIPFS } from "./pinata.js";
 const alchemyKey = "https://eth-ropsten.alchemyapi.io/v2/1YEIbZYAJzK5zhtE1BZfOwxuD7NrhCLE";
 const contractABI = require("../contract-abi.json");
 const contractAddress = "0xDbf2da336dE4119E14162707395EA1351AeC6D52";
